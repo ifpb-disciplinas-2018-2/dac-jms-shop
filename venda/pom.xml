@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.edu.ifpb</groupId>
-    <artifactId>dac-jms-shop</artifactId>
+    <artifactId>dac-jms-venda</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>dac-jms-shop</name>
+    <name>dac-jms-venda</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
