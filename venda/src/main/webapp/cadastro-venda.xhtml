@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>JMS-Shop - Realizar Venda</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/style.css"/>
+    </h:head>
+    <h:body>
+        <ui:include src="nav.xhtml"/>
+        <div class="container">
+            <h4>Cadastro de Venda</h4>
+            <div class="row valign-wrapper">
+                <!-- Lista os produtos e adiciona a venda -->
+                <h:form>
+                    <div class="col">
+                        <p>Selecionar Produdos: </p>
+                    </div>
+                    <div class="col">
+                        <p>Adicionar select</p>
+                        
+                    </div>
+                    <div class="col">
+                        <p>
+                            <h:commandLink class="btn-small" action="#">Adicionar</h:commandLink>
+                        </p>
+                        
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Lista os itens de venda -->
+            <div class="row">
+                <div class="col s4">
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Venda</h4></li>
+                        <li class="collection-item">
+                            <div>
+                                Produto
+                                <a href="#!" class="secondary-content">
+                                    <i class="material-icons">clear</i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cadastra venda -->
+                <div class="col s5 offset-s1">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Formulário de venda</h5>
+                        </div>
+                    </div>
+                    <h:form>
+                        <div class="row">
+                            <div class="col s6">
+                                <label for="cartao">Número do cartão:</label>
+                                <h:inputText id="cartao" class="validate" value="#"/>
+                            </div>
+                            <div class="col s4 offset-s1">
+                                <label for="total">Valor da compra:</label>
+                                <h:inputText id="total" class="validate" value="#"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <h:commandButton class="waves-effect waves-light btn-large full-width" value="Realizar venda" action="#"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
