@@ -16,6 +16,12 @@ public class Produto implements Serializable {
     private String descricao;
     private float valor;
 
+    public Produto(String descricao, float valor) {
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+    
+
     public Produto() {
     }
 
