@@ -42,48 +42,65 @@ public class Venda implements Serializable {
     private List <ItemDeVenda> itens;
 
     public Venda(Integer numeroCartao, double valor, List<ItemDeVenda> itens) {
-        this.venda_id =  venda_id;
         this.numeroCartao = numeroCartao;
         this.data = new Date();
-        this.valor = total(itens);
+        total();
     }
 
     public Venda() {
         this.itens= new ArrayList<>();
-       
+        this.data = new Date();
     }
 
-    public long getId() {
+    public long getVenda_id() {
         return venda_id;
     }
 
-    public void setId(long id) {
-        this.venda_id = id;
+    public void setVenda_id(long venda_id) {
+        this.venda_id = venda_id;
     }
 
-    public int getNumeroCartao() {
+    public Integer getNumeroCartao() {
         return numeroCartao;
     }
 
-    public void setNumeroCartao(int numeroCartao) {
+    public void setNumeroCartao(Integer numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
 
     public double getValor() {
-        return valor;
+        total();
+        return this.valor;
     }
 
     public void setValor(double valor) {
         this.valor = valor;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public List<ItemDeVenda> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemDeVenda> itens) {
+        this.itens = itens;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + (int) (this.venda_id ^ (this.venda_id >>> 32));
-        hash = 23 * hash + Objects.hashCode(this.numeroCartao);
-        hash = 23 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
-        hash = 23 * hash + Objects.hashCode(this.itens);
+        int hash = 3;
+        hash = 71 * hash + (int) (this.venda_id ^ (this.venda_id >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.numeroCartao);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.data);
+        hash = 71 * hash + Objects.hashCode(this.itens);
         return hash;
     }
 
@@ -108,6 +125,9 @@ public class Venda implements Serializable {
         if (!Objects.equals(this.numeroCartao, other.numeroCartao)) {
             return false;
         }
+        if (!Objects.equals(this.data, other.data)) {
+            return false;
+        }
         if (!Objects.equals(this.itens, other.itens)) {
             return false;
         }
@@ -116,17 +136,16 @@ public class Venda implements Serializable {
 
     @Override
     public String toString() {
-        return "Venda{" + "id=" + venda_id + ", numeroCartao=" + numeroCartao + ""
-                + ", valor=" + valor + ", itens=" + itens + '}';
+        return "Venda{" + "venda_id=" + venda_id + ", numeroCartao=" + numeroCartao + ", valor=" + valor + ", data=" + data + ", itens=" + itens + '}';
     }
 
-    public double total(List<ItemDeVenda> item) {
+    private void total() {
         double valorTotal = 0;
-        for (int i = 0; i < item.size(); i++) {
+        for (int i = 0; i < itens.size(); i++) {
 
-            valorTotal += item.get(i).getSubtotal();
+            valorTotal += itens.get(i).getSubtotal();
 
         }
-        return valorTotal;
+        this.valor = valorTotal;
     }
 }

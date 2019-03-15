@@ -19,18 +19,18 @@
                         <div class="row">
                             <div class="col s10">
                                 <label for="descricao">Descrição do Produto:</label>
-                                <h:inputTextarea id="descricao" value="#"></h:inputTextarea>
+                                <h:inputText id="descricao" value="#{controllerProduto.produto.descricao}"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label for="valor">Valor:</label>
-                                <h:inputText id="valor" value="#"/>
+                                <h:inputText id="valor" value="#{controllerProduto.produto.valor}"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s12">
-                                <h:commandButton class="waves-effect waves-light btn-large full-width" action="#" value="Cadastrar"/>
+                                <h:commandButton class="waves-effect waves-light btn-large full-width" action="#{controllerProduto.cadastrar()}" value="Cadastrar"/>
                             </div>
                         </div>
                     </h:form>

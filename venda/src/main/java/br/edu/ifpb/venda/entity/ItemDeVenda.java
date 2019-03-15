@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-
-    
-
 public class ItemDeVenda implements Serializable {
 
     @Id
@@ -27,22 +24,18 @@ public class ItemDeVenda implements Serializable {
     }
 
     public ItemDeVenda( Produto produto, int quant) {
-        this.id = id;
         this.produto = produto;
         this.quant = quant;
-        this.subtotal=calculoSub( quant,produto);
-        
+        this.subtotal=calculoSub(); 
     }
 
     public double getSubtotal() {
-        return subtotal;
+        return calculoSub();
     }
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
-
-   
     
     public Long getId() {
         return id;
@@ -68,9 +61,8 @@ public class ItemDeVenda implements Serializable {
         this.quant = quant;
     }
 
-    private  double calculoSub(int quant,Produto prod) {
-       double valor = quant* prod.getValor();
-       return valor;
+    private  double calculoSub() { 
+       return quant * produto.getValor();
     }
     
 }

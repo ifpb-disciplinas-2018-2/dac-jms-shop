@@ -5,3 +5,7 @@
     width: 100% !important;
 }
 
+select.select{
+    display: block !important;
+}
+
