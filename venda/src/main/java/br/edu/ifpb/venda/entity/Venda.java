@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
 
@@ -38,10 +39,10 @@ public class Venda implements Serializable {
     private double valor;
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List <ItemDeVenda> itens;
 
-    public Venda(Integer numeroCartao, double valor, List<ItemDeVenda> itens) {
+    public Venda(Integer numeroCartao, List<ItemDeVenda> itens) {
         this.numeroCartao = numeroCartao;
         this.data = new Date();
         total();

@@ -2,12 +2,11 @@ package br.edu.ifpb.venda.controller;
 
 import br.edu.ifpb.venda.dao.VendaIF;
 import br.edu.ifpb.venda.entity.ItemDeVenda;
-import br.edu.ifpb.venda.entity.Produto;
 import br.edu.ifpb.venda.entity.Venda;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -15,8 +14,8 @@ import javax.inject.Named;
  * @author Amanda
  */
 @Named
-@RequestScoped
-public class ControllerVenda {
+@SessionScoped
+public class ControllerVenda implements Serializable{
     
     @EJB
     private VendaIF vendaDao;
@@ -38,6 +37,11 @@ public class ControllerVenda {
     public String addItemVenda(){
         this.venda.getItens().add(this.itemDeVenda);
         this.itemDeVenda = new ItemDeVenda();
+        return null;
+    }
+    
+    public String removeItemVenda(ItemDeVenda itemDeVenda){
+        this.venda.getItens().remove(itemDeVenda);
         return null;
     }
 

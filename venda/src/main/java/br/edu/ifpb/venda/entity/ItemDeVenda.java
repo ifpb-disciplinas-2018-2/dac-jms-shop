@@ -30,7 +30,8 @@ public class ItemDeVenda implements Serializable {
     }
 
     public double getSubtotal() {
-        return calculoSub();
+        this.subtotal = calculoSub();
+        return this.subtotal;
     }
 
     public void setSubtotal(double subtotal) {

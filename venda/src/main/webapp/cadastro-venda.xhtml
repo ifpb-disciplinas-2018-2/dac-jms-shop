@@ -50,16 +50,18 @@
                 <div class="col s4">
                     <ul class="collection with-header">
                         <li class="collection-header"><h4>Venda</h4></li>
-                        <c:forEach items="#{controllerVenda.listarItensVenda()}" var="item">
-                            <li class="collection-item">
-                                <div>
-                                    #{item.produto.descricao} - qt #{item.quant} - R$ #{item.subtotal}
-                                    <a href="#!" class="secondary-content">
-                                        <i class="material-icons">clear</i>
-                                    </a>
-                                </div>
-                            </li>
-                        </c:forEach>  
+                        <h:form>
+                            <c:forEach items="#{controllerVenda.listarItensVenda()}" var="item">
+                                <li class="collection-item">
+                                    <div>
+                                        #{item.produto.descricao} - qt #{item.quant} - R$ #{item.subtotal}
+                                        <h:commandLink class="secondary-content" action="#{controllerVenda.removeItemVenda(item)}">
+                                            <i class="material-icons">clear</i>
+                                        </h:commandLink>
+                                    </div>
+                                </li>
+                            </c:forEach>  
+                        </h:form>
                     </ul>
                 </div>
 
