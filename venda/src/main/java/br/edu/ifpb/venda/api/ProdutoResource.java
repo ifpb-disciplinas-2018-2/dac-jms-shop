@@ -3,13 +3,17 @@ package br.edu.ifpb.venda.api;
 import br.edu.ifpb.venda.dao.ProdutoDao;
 import br.edu.ifpb.venda.entity.Produto;
 import java.net.URI;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -25,6 +29,26 @@ public class ProdutoResource {
     @Context
     private UriInfo uriInfo;
 
+    @GET
+    public Response listarProdutos() {
+
+        List<Produto> resposta = this.service.listar();
+        GenericEntity<List<Produto>> lista = new GenericEntity<List<Produto>>(resposta) { };
+        return Response.ok()
+            .entity(lista)
+            .build();
+    }
+
+    @GET
+    @Path("{id}")
+    public Response listarProduto(@PathParam("id") int id) {
+
+        Produto resposta = this.service.buscar(id);
+        return Response.ok()
+            .entity(resposta)
+            .build();
+    }
+    
     @POST
     public Response novoProduto(Produto produto) {
         this.service.salvar(produto);
