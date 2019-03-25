@@ -1,10 +1,12 @@
 package br.edu.ifpb.venda.controller;
 
+import br.edu.ifpb.venda.api.ProdutoClient;
 import br.edu.ifpb.venda.dao.ProdutoDaoIF;
 import br.edu.ifpb.venda.entity.Produto;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -15,8 +17,8 @@ import javax.inject.Named;
 @RequestScoped
 public class ControllerProduto {
 
-    @EJB
-    private ProdutoDaoIF prodDao;
+    @EJB//(mappedName = "consumirCliente")
+    private ProdutoClient prodDao;
     private Produto produto = new Produto();
 
     public String cadastrar() {

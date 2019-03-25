@@ -4,6 +4,7 @@ import br.edu.ifpb.venda.dao.ProdutoDao;
 import br.edu.ifpb.venda.dao.ProdutoDaoIF;
 import br.edu.ifpb.venda.entity.Produto;
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -16,9 +17,11 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(value = "produtoConverter", forClass = Produto.class)
 public class ProdutoConverter implements Converter {
     
-    private final ProdutoDaoIF dao = new ProdutoDao();
+    private final ProdutoDao dao;
 
-    @Override
+    public ProdutoConverter() {
+        this.dao = CDI.current().select(ProdutoDao.class).get();
+    }
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if(value == null || value.isEmpty()){
             return null;

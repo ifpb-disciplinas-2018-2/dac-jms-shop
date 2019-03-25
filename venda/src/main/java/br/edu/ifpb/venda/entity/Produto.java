@@ -2,6 +2,7 @@ package br.edu.ifpb.venda.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.json.JsonObject;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,12 @@ public class Produto implements Serializable {
     
 
     public Produto() {
+    }
+
+    public Produto(JsonObject jsonObject) {
+        this.id = jsonObject.getJsonNumber("id").longValue();
+        this.descricao = jsonObject.getString("descricao");
+        this.valor = (float) jsonObject.getJsonNumber("valor").doubleValue();
     }
 
     public Long getId() {
