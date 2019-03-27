@@ -1,5 +1,6 @@
-package mensegerDB;
+package MDB;
 
+import controller.AnalisaCartao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
@@ -8,7 +9,7 @@ import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import model.CartaoCredito;
+import model.Cartao;
 
 
 /**
@@ -27,10 +28,10 @@ import model.CartaoCredito;
                                   propertyValue = "queue")
     }
 )
-public class LerCompra implements MessageListener{
+public class LerCompraMB implements MessageListener{
 
     @Inject
-    private CartaoCredito cartaoCredito;
+    private AnalisaCartao analisaCartao;
     
     @Override
     public void onMessage(Message msg) {
@@ -45,7 +46,7 @@ public class LerCompra implements MessageListener{
 
             System.out.println("LEITOR:: Analisando valor da compra");
             
-            boolean validaCompra = cartaoCredito.validarCartao(cartaoNumero, valorCompra);
+            boolean validaCompra = analisaCartao.validarCompra(cartaoNumero, valorCompra);
            
             if (validaCompra) {
 
@@ -56,7 +57,7 @@ public class LerCompra implements MessageListener{
             }
             
         } catch (JMSException ex) {
-            Logger.getLogger(LerCompra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LerCompraMB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

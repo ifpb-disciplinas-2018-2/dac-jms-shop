@@ -1,26 +1,30 @@
 package model;
 
-import database.ConsultaDados;
 import java.io.Serializable;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author fernanda
  */
 
-@Stateless
-public class CartaoCredito implements Serializable{
+@Entity
+public class Cartao implements Serializable{
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int numero;
     private Double valorLimite;
 
-    public CartaoCredito() {
+    public Cartao() {
     }
 
-    public CartaoCredito(int id, int numero, Double valorLimite) {
+    public Cartao(int id, int numero, Double valorLimite) {
         this.id = id;
         this.numero = numero;
         this.valorLimite = valorLimite;
@@ -54,16 +58,9 @@ public class CartaoCredito implements Serializable{
     public String toString() {
         return "CartaoCredito{" + "id=" + id + ", numero=" + numero + ", valorLimite=" + valorLimite + '}';
     } 
-    
-    public void validarCartao(Double valorTotal) {
-        ConsultaDados consultaDados = new ConsultaDados();
-        Double limiteDisponivel = consultaDados.consultarCartao((EntityManager) this);
-        if(limiteDisponivel >= valorTotal){
-            limiteDisponivel -= valorTotal;
-        }
-    }
 
-    public boolean validarCartao(String cartaoNumero, Double valorCompra) {
-        return valorCompra <= 1000;
+    public List<Cartao> getResultList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

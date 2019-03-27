@@ -1,8 +1,9 @@
-package mensegerDB;
+package MDB;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
@@ -14,7 +15,8 @@ import javax.jms.Queue;
  *
  * Created by rodger on Mar 27, 2019 5:16:03 PM
  */
-public class EnviarCompra {
+@Stateless
+public class EnviarCompraMB {
     
     @Resource(lookup = "jms/cartaoMsg")
     private Queue queue;
@@ -37,7 +39,7 @@ public class EnviarCompra {
             System.out.println("ENVIADOR:: Mensagem enviada");
             
         } catch (JMSException ex) {
-            Logger.getLogger(EnviarCompra.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(EnviarCompraMB.class.getName()).log(Level.SEVERE,null,ex);
         }
         
     }

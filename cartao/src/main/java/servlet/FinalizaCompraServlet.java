@@ -14,22 +14,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mensegerDB.EnviarCompra;
-import mensegerDB.LerCompra;
-import model.CartaoCredito;
+import MDB.EnviarCompraMB;
+import controller.AnalisaCartao;
+
 
 /**
  *
  * @author rodger
  */
 @WebServlet(name = "compra", urlPatterns = {"/compra"})
-public class FinalizaCompra extends HttpServlet {
+public class FinalizaCompraServlet extends HttpServlet {
 
     @Inject
-    private CartaoCredito cartaoCredito;
+    private AnalisaCartao cartaoCredito;
     
     @Inject
-    private EnviarCompra enviarCompra; 
+    private EnviarCompraMB enviarCompra; 
     
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +44,7 @@ public class FinalizaCompra extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Enviar msg at " + request.getContextPath() + "</h1>");
-            out.println("<p>" + cartaoCredito.validarCartao("1133.3213.1231.1323", 983d) + "</p>");
+            out.println("<p>" + cartaoCredito.validarCompra("1133.3213.1231.1323", 983d) + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
