@@ -14,7 +14,7 @@ import model.CartaoCredito;
  * @author fernanda
  */
 public class PersisteDados {
-    @PersistenceContext(unitName = "cartao")
+    @PersistenceContext(unitName = "databases")
     private final EntityManager em;
 
     public PersisteDados(EntityManager em) {
