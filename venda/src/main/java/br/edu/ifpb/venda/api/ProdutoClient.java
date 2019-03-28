@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
 //@Remote(ProdutoDaoIF.class)
 public class ProdutoClient{ //implements ProdutoDaoIF{
     
-    private final String url = "http://localhost:8081/venda/api/produtos";
+    private final String url = "http://localhost:8080/shop-venda/api/produtos";
     private final Client client = ClientBuilder.newClient();
     private final WebTarget produtos = client.target(url);
 
