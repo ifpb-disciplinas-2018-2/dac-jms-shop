@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import model.Cartao;
 
 
 /**

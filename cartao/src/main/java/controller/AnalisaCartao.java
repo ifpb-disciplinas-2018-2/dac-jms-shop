@@ -3,6 +3,7 @@ package controller;
 
 import infra.CartaoManager;
 import javax.ejb.Stateless;
+import model.Cartao;
 
 /**
  *
@@ -14,16 +15,22 @@ public class AnalisaCartao {
     CartaoManager cManager = new CartaoManager();
     
     public boolean validarCompra(String cartaoNumero, Double valorCompra) {
-        
-//        Double limiteDisponivel = cManager.consultarCartao(cartaoNumero);
-//        if(limiteDisponivel >= valorCompra){
-//            Double novoLimite = limiteDisponivel - valorCompra;
-//            cManager.alterarValorLimite(cartaoNumero, novoLimite);
-//            return true;
-//        }
-//        return false;
-        
-        return valorCompra <= 1000;
+        Cartao cartao = buscarCartao(cartaoNumero);//cManager.buscarCartao(cartaoNumero);
+        Double limiteDisponivel = cartao.getValorLimite() ;
+        if(limiteDisponivel >= valorCompra){
+            return novoLimite(limiteDisponivel, valorCompra, cartao);
+        }
+        return false;
+    }
+
+    private Cartao buscarCartao(String cartaoNumero) {
+        return cManager.buscarCartao(cartaoNumero);
+    }
+    
+    private boolean novoLimite(Double limiteDisponivel, Double valorCompra, Cartao cartao) {
+        Double novoLimite = limiteDisponivel - valorCompra;
+        cManager.alterarValorLimite(cartao.getId(), novoLimite);
+        return true;
     }
 
 }

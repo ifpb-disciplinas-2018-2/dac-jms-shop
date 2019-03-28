@@ -8,7 +8,9 @@ package infra;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import model.Cartao;
 
@@ -18,31 +20,47 @@ import model.Cartao;
  */
 public class CartaoManager {
 
-    private final static String PERSISTENCE_UNIT = "cartao";
+    private final static String PERSISTENCE_UNIT_NAME = "cartao";
     
-    private EntityManager em;
+    private EntityManager manager;
     
     public CartaoManager() {
-        this.em = Persistence
-            .createEntityManagerFactory(PERSISTENCE_UNIT)
+        this.manager = Persistence
+            .createEntityManagerFactory(PERSISTENCE_UNIT_NAME)
             .createEntityManager();
     }
     
     public void inserirDados(Cartao cartao){
-        em.persist(cartao);
-        em.getTransaction().commit();
+        manager.persist(cartao);
+        manager.getTransaction().commit();
     }
     
-    public Double consultarCartao(String cartao) {
-        String sql = "SELECT c.valorLimite FROM CartaoCredito c WHERE c.numero = :cartao"; 
+    public Cartao buscarCartao(String numeroCartao) {
+        String sql = "SELECT c.valorLimite FROM CartaoCredito c WHERE c.numero = :numeroCartao"; 
          
-        TypedQuery<Double> query = em.createQuery(sql, Double.class);
-        Double valorLimite = query.setParameter("cartao", cartao).getSingleResult();
+        TypedQuery<Cartao> query = manager.createQuery(sql, Cartao.class);
+        Cartao cartao = query.setParameter("numeroCartao", numeroCartao).getSingleResult();
      
-        return valorLimite;
+        return cartao;
     }
 
-    public void alterarValorLimite(String cartaoNumero, Double novoLimite) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alterarValorLimite(int id, Double novoLimite) {
+        Cartao cartao = buscarPorId(id);        
+        cartao.setValorLimite(novoLimite);
+        manager.merge(cartao);
+    }
+    
+    public Cartao buscarPorId(int cartaoId) {
+        Cartao cartao = manager.find(Cartao.class, cartaoId);
+        if (cartao == null) {
+            throw new EntityNotFoundException("Nenhum artista encontrado para o ID :: "
+                + cartaoId);
+        }
+        return cartao;
+    }
+    
+    public List<Cartao> todosOsCartoes() {
+        Query query = manager.createQuery("SELECT C FROM Cartao c", Cartao.class);
+        return query.getResultList();
     }
 }
